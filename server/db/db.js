@@ -54,7 +54,7 @@ const Student = db.define('student', {
         defaultValue: 'default-student.jpg'
     },
     gpa: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         validate: {
             min: 0.0,
             max: 4.0
@@ -64,10 +64,6 @@ const Student = db.define('student', {
 
 Student.belongsTo(Campus)
 Campus.hasMany(Student)
-
-
-
-
 
 
 
@@ -82,5 +78,10 @@ const syncAndSeed = async() => {
 }
 
 module.exports = {
-    syncAndSeed
+    db,
+    syncAndSeed,
+    models: {
+        Campus,
+        Student
+    }
 }
