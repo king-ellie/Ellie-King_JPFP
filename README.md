@@ -1,0 +1,1 @@
++ create database "campuses" with CLI command: createdb campuses
