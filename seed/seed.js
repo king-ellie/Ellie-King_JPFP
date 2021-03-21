@@ -1,5 +1,7 @@
 const { db, models: { Campus, Student}} = require('../server/db/db')
-const {campuses, students} = require('./seedData')
+// const {campuses, students} = require('./seedData')
+const campuses = require('./campusesData.json')
+const students = require('./studentsData.json')
 
 
 
@@ -15,6 +17,9 @@ const seedDatabase = async() => {
     }
     catch(error){
         console.log('SEED DATABASE ERROR: ', error)
+    }
+    finally {
+        db.close();
     }
 }
 seedDatabase()

@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "build:dev": "npm run build -- --watch --mode=development",
-    "start:dev": "npm run build:dev & nodemon server/index --ignore dist/ --ignore src/",
+    "build:watch": "webpack -w",
+    "start": "npm run start:server & npm run build:watch",
+    "start:server": "nodemon server/index --ignore dist/ --ignore src/",
     "seed": "node seed/seed.js"
   },
   "keywords": [],

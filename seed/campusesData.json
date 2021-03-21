@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Wake Forest University",
+        "address": "1834 Wake Forest Dr., Winston-Salem, NC, 27109",
+        "description": "Wake Forest University is a private research university in Winston-Salem, North Carolina. Founded in 1834, the university received its name from its original location in Wake Forest, north of Raleigh, North Carolina. The Reynolda Campus, the university's main campus, has been located north of downtown Winston-Salem since the university moved there in 1956. The Wake Forest Baptist Medical Center campus has two locations, the older one located near the Ardmore neighborhood in central Winston-Salem, and the newer campus at Wake Forest Innovation Quarter downtown. The university also occupies lab space at Biotech Plaza at Innovation Quarter, and at the Center for Nanotechnology and Molecular Materials. The university's Graduate School of Management maintains a presence on the main campus in Winston-Salem and in Charlotte, North Carolina. (Wikipedia)"
+    },
+    {
+        "name": "Colorado College",
+        "address": "14 E, W Cache La Poudre St, Colorado Springs, CO 80903",
+        "description": "Colorado College, also known as CC, is a private liberal arts college in Colorado Springs, Colorado. It was founded in 1874 by Reverend Thomas Nelson Haskell in his daughter's memory. The college enrolls approximately 2,000 undergraduates at its 90-acre (36 ha) campus. The college offers 42 majors and 33 minors. Notable alumni include James Heckman, Dutch Clark, Ken Salazar, Lynne Cheney, Thomas Hornsby Ferril, Marc Webb, and Steve Sabol. (Wikipedia)"
+    },
+    {
+        "name": "New York University",
+        "address": "New York, NY 10003",
+        "description": "New York University (NYU) is a private research university in New York City. Chartered in 1831 by the New York State Legislature,[13] NYU was founded by a group of New Yorkers led by then Secretary of the Treasury Albert Gallatin. In 1832, the initial non-denominational all-male institution began its first classes near City Hall based on a curriculum focused on a secular education. The university later moved and has maintained its main campus in Greenwich Village surrounding Washington Square Park, but was forced to sell its University Heights campus in the Bronx in 1973. Since then, the university has added a division in Brooklyn's MetroTech Center and graduate schools throughout Manhattan. NYU has become the largest private university in the United States by enrollment, with a total of 51,848 enrolled students, including 26,733 undergraduate students and 25,115 graduate students, in 2019. NYU also receives the most applications of any private institution in the United States and admissions is considered highly selective. (Wikipedia)"
+    },
+    {
+        "name": "Santa Clara University",
+        "address": "500 El Camino Real, Santa Clara, CA 95053",
+        "description": "Santa Clara University is a private Jesuit university in Santa Clara, California. Established in 1851, Santa Clara University is the oldest operating institution of higher learning in California and has remained in its original location since its establishment. The university's campus surrounds the historic Mission Santa Clara de Asís which traces its founding to 1776. The campus mirrors the Mission's architectural style and provides a fine early example of Mission Revival architecture. The university is classified as a 'Doctoral/Professional' university by Carnegie Classification. (Wikipedia)"
+    }
+]

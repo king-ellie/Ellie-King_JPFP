@@ -1,2 +1,4 @@
 + create database "campuses" with CLI command: createdb campuses
-+ npm run seed
+- `npm install`
+- `npm start`
+- Open another terminal window; from there, `npm run seed` to seed the database

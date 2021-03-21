@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize')
 
-const db = new Sequelize('postgres://localhost/campuses')
+const db = new Sequelize('postgres://localhost/campuses', {logging: false})
 
 const Campus = db.define('campus', {
     name: {
@@ -67,19 +67,8 @@ Campus.hasMany(Student)
 
 
 
-
-const syncAndSeed = async() => {
-    try {
-        await db.sync({ force: true })
-    }
-    catch(error){
-        console.log('SYNCANDSEED ERROR: ', error)
-    }
-}
-
 module.exports = {
     db,
-    syncAndSeed,
     models: {
         Campus,
         Student
