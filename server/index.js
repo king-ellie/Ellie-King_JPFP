@@ -4,22 +4,24 @@ const app = express()
 
 const { db, models: { Campus, Student } } = require('./db/db')
 
-// app.use('/client', express.static(path.join(__dirname + '../client')))
+app.use('/public', express.static(path.join(__dirname, '../public')))
 app.use('/dist', express.static(path.join(__dirname, '../dist')))
 
 app.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../client/index.html'))
 })
 
-// API ROUTES - CURRENT PROBLEM: data is sent the first time i hit the endpoint. But if i change my code, save, and refresh, the endpoint shows an empty array and the instances are dropped from the database. something with seeding?
+
+// API ROUTES
 app.get('/api/campuses', async (req, res, next) => {
     const campuses = await Campus.findAll()
     res.send(campuses)
 })
 
-// app.get('/api/students', async (req, res, next) => {
-//     res.send(await Student.findAll())
-// })
+app.get('/api/students', async (req, res, next) => {
+    const students = await Student.findAll()
+    res.send(students)
+})
 
 
 const init = async() => {

@@ -65,8 +65,6 @@ const Student = db.define('student', {
 Student.belongsTo(Campus)
 Campus.hasMany(Student)
 
-
-
 module.exports = {
     db,
     models: {
