@@ -16,7 +16,7 @@ class campusList extends React.Component {
                 <h1>All Campuses</h1>
                 <ul>
                     {this.props.campuses.map( campus => {
-                        return (<li>{campus.name}</li>)
+                        return (<li key={campus.id}>{campus.name}</li>)
                     })}
                 </ul>
             </div>
