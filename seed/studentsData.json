@@ -1,8 +1,8 @@
 [
     {
         "firstName": "Joe",
-        "lastName": "White",
-        "email": "whitejoe@wfu.edu",
+        "lastName": "Edmond",
+        "email": "edmondjoe@wfu.edu",
         "gpa": 3.2,
         "campusId": 1
     },

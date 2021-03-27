@@ -8,17 +8,22 @@ class campusList extends React.Component {
     }
     async componentDidMount() {
         await this.props.loadCampuses()
-        console.log('this.props: ', this.props)
     }
     render() {
         return (
             <div>
                 <h1>All Campuses</h1>
-                <ul>
-                    {this.props.campuses.map( campus => {
-                        return (<li key={campus.id}>{campus.name}</li>)
-                    })}
-                </ul>
+                {this.props.campuses.map( campus => {
+                    return (
+                        <div key={campus.id}>
+                            <img src={campus.imageUrl}></img>
+                            <ul>
+                                <li>{campus.name}</li>
+                                <li>{campus.address}</li>
+                            </ul>
+                        </div>
+                    )
+                })}
             </div>
         )
     }

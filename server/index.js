@@ -4,8 +4,7 @@ const app = express()
 
 const { db, models: { Campus, Student } } = require('./db/db')
 
-app.use('/public', express.static(path.join(__dirname, '../public')))
-app.use('/dist', express.static(path.join(__dirname, '../dist')))
+app.use(express.static(path.join(__dirname, '..', 'public')))
 
 app.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../client/index.html'))
