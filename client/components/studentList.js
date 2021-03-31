@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react';
 import { connect } from 'react-redux'
+import { HashRouter as Router, Link } from 'react-router-dom'
 
 class studentList extends React.Component {
     constructor(props) {
@@ -8,28 +9,26 @@ class studentList extends React.Component {
     }
     async componentDidMount() {
         await this.props.loadStudents()
-        await this.props.loadCampuses()
     }
     render() {
         return (
-            <div>
-                <h1>All Students</h1>
-                {this.props.students.map( student => {
-                    return (
-                    <div key={student.id}>
-                        <img src={student.imageUrl}></img>
-                        <ul>
-                            <li>{student.firstName} {student.lastName}</li>
-                            <li>Email: {student.email}</li>
-                            <li>Campus: {this.props.campuses.map(campus => {
-                                if (campus.id === student.campusId){
-                                    return campus.name
-                                }
-                            })}</li>
-                        </ul>
-                    </div>)
-                })}
-            </div>
+            <Router>   
+                <div>
+                    <h1>All Students</h1>
+                    {this.props.students.map( student => {
+                        const studentUrl = `/students/${student.id}`
+                        return (
+                        <div key={student.id}>
+                            <img src={student.imageUrl}></img>
+                            <ul>
+                                <Link to={studentUrl}><li>{student.firstName} {student.lastName}</li></Link>
+                                <li>Email: {student.email}</li>
+                                <li>Campus: {student.campus.name}</li>
+                            </ul>
+                        </div>)
+                    })}
+                </div>
+            </Router> 
         )
     }
 }
@@ -44,15 +43,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({
                 type: 'LOAD_STUDENTS',
                 students
-                })
-            },
-        loadCampuses: async() => {
-            const campuses = (await axios.get('/api/campuses')).data
-            dispatch({
-                type: 'LOAD_CAMPUSES',
-                campuses
-                })
-            }
+            })
+        },
     }
 }
 
