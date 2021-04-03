@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { HashRouter as Router, Link} from 'react-router-dom'
 import AddCampus from './AddCampus'
 
-import {_loadCampuses} from '../store/actions'
+import {_deleteCampus, _loadCampuses} from '../store/actions'
 
 class CampusList extends React.Component {
     constructor(props) {
@@ -29,6 +29,7 @@ class CampusList extends React.Component {
                                         <li>{campus.name}</li>
                                     </Link>
                                     <li>{campus.address}</li>
+                                    <button onClick={() => this.props.deleteCampus(campus.id)}>X</button>
                                 </ul>
                             </div>
                         )
@@ -47,6 +48,10 @@ const mapDispatchToProps = (dispatch) => {
         loadCampuses: async() => {
             const campuses = (await axios.get('/api/campuses')).data
             dispatch(await _loadCampuses(campuses))
+        },
+        deleteCampus: async(id) => {
+            const campus = (await axios.delete(`/api/campuses/${id}`)).data
+            dispatch(await _deleteCampus(campus))
         }
     }
 }
