@@ -3,18 +3,27 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { HashRouter as Router, Link } from 'react-router-dom'
 
-class studentList extends React.Component {
+import { _loadStudents } from '../store/actions'
+import AddStudent from './AddStudent';
+
+class StudentList extends React.Component {
     constructor(props) {
         super(props)
     }
     async componentDidMount() {
-        await this.props.loadStudents()
+        try{
+            await this.props.loadStudents()
+        }
+        catch(error){
+            console.log('STUDENTLIST DIDMOUNT ERROR: ', error)
+        }
     }
     render() {
         return (
             <Router>   
                 <div>
                     <h1>All Students</h1>
+                    <AddStudent />
                     {this.props.students.map( student => {
                         const studentUrl = `/students/${student.id}`
                         return (
@@ -23,7 +32,9 @@ class studentList extends React.Component {
                             <ul>
                                 <Link to={studentUrl}><li>{student.firstName} {student.lastName}</li></Link>
                                 <li>Email: {student.email}</li>
-                                <li>Campus: {student.campus.name}</li>
+                                {student.campus !== null
+                                ? <li>Campus: {student.campus.name}</li> 
+                                : <h5>This student is not registered to a campus.</h5>}
                             </ul>
                         </div>)
                     })}
@@ -40,12 +51,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         loadStudents: async() => {
             const students = (await axios.get('/api/students')).data
-            dispatch({
-                type: 'LOAD_STUDENTS',
-                students
-            })
+            dispatch(await _loadStudents(students))
         },
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(studentList);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentList);

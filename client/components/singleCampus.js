@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-class singleCampus extends React.Component {
+class SingleCampus extends React.Component {
     constructor(props) {
         super(props)
         this.campusId = this.props.match.params.id
@@ -27,7 +27,8 @@ class singleCampus extends React.Component {
                                 <h4>{campus.address}</h4>
                             </div>
                             <div id='studentsContainer'>
-                                {campus.students.map( student => {
+                                {campus.students.length 
+                                ? campus.students.map( student => {
                                     let studentUrl = `/students/${student.id}`
                                     return (
                                         <div key={student.id} className='student'>
@@ -35,7 +36,8 @@ class singleCampus extends React.Component {
                                             <Link to={studentUrl}><h4>{student.firstName} {student.lastName}</h4></Link>
                                         </div>
                                     )
-                                })}
+                                }) 
+                                : <h5>This campus does not have any registered students.</h5>}
                             </div>
                         </div>
                     )
@@ -60,4 +62,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(singleCampus);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleCampus);

@@ -2,8 +2,9 @@ import axios from 'axios'
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { _loadStudents } from '../store/actions'
 
-class singleStudent extends React.Component {
+class SingleStudent extends React.Component {
     constructor(props) {
         super(props)
         this.studentId = this.props.match.params.id
@@ -12,11 +13,9 @@ class singleStudent extends React.Component {
         await this.props.loadStudents(this.studentId)
     }
     render() {
-        console.log(this.props.students)
         return (
             <div>
                 {this.props.students.map( student => {
-                    const campusUrl = `/campuses/${student.campus.id}`
                     return (
                         <div key={student.id}>    
                             <img src={student.imageUrl}></img>
@@ -25,7 +24,9 @@ class singleStudent extends React.Component {
                                 <li>GPA: {student.gpa}</li>
                                 <li>Email: {student.email}</li>
                             </ul>
-                            <p>{student.firstName} is registered to a campus: <Link to={campusUrl}>{student.campus.name}</Link></p>
+                            {student.campus !== null 
+                            ? <p>{student.firstName} is registered to a campus: <Link to={`/campuses/${student.campus.id}`}>{student.campus.name}</Link></p>
+                            : <h5>This student is not registered to a campus.</h5>}
                         </div>
                     )
                 })}
@@ -41,12 +42,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         loadStudents: async(id) => {
             const students = (await axios.get(`/api/students/${id}`)).data
-            dispatch({
-                type: 'LOAD_STUDENTS',
-                students
-            })
+            dispatch(await _loadStudents(students))
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(singleStudent);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleStudent);

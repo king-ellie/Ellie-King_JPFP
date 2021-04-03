@@ -4,6 +4,8 @@ const app = express()
 
 const { db, models: { Campus, Student } } = require('./db/db')
 
+app.use(express.json())
+
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
 app.get('/', (req, res, next) => {
@@ -12,14 +14,15 @@ app.get('/', (req, res, next) => {
 
 
 // API ROUTES
-app.get('/api/campuses', async (req, res, next) => {
+//GET
+app.get('/api/campuses', async(req, res, next) => {
     const campuses = await Campus.findAll({
         include: Student
     })
     res.send(campuses)
 })
 
-app.get('/api/campuses/:id', async (req, res, next) => {
+app.get('/api/campuses/:id', async(req, res, next) => {
     const campus = await Campus.findAll({
         where: {
             id: req.params.id
@@ -29,14 +32,14 @@ app.get('/api/campuses/:id', async (req, res, next) => {
     res.send(campus)
 })
 
-app.get('/api/students', async (req, res, next) => {
+app.get('/api/students', async(req, res, next) => {
     const students = await Student.findAll({
         include: Campus
     })
     res.send(students)
 })
 
-app.get('/api/students/:id', async (req, res, next) => {
+app.get('/api/students/:id', async(req, res, next) => {
     const student = await Student.findAll({
         where: {
             id: req.params.id
@@ -44,6 +47,29 @@ app.get('/api/students/:id', async (req, res, next) => {
         include: Campus
     })
     res.send(student)
+})
+
+//POST
+app.post('/api/campuses', async(req, res, next) => {
+    const campusName = req.body.campusName
+    const address = req.body.address
+    const newCampus = await Campus.create({
+        name: campusName,
+        address: address
+    })
+    res.send(newCampus)
+})
+
+app.post('/api/students', async(req, res, next) => {
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
+    const email = req.body.email
+    const newStudent = await Student.create({
+        firstName,
+        lastName,
+        email
+    })
+    res.send(newStudent)
 })
 
 

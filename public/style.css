@@ -1,6 +1,28 @@
+#app {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+#header {
+    text-align: center;
+    text-shadow: skyblue 5px 2px 15px;
+}
 nav {
     display: flex;
     justify-content: space-around;
+    background-color: wheat;
+    padding: .5rem;
+    width: 100%;
+    font-weight: bold
+}
+
+ul {
+    list-style: none
+}
+
+.listed-campus {
+    display: flex;
+    margin: 1rem;
+    align-items: center
 }
 
 #studentsContainer {
@@ -14,4 +36,16 @@ nav {
     border: 3px solid black;
     margin: 20px;
     align-items: center
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    padding: 1rem;
+    margin: 1rem;
+    width: 10rem;
+    align-self: center
 }
