@@ -34,3 +34,10 @@ export const _deleteCampus = async(campus) => {
         campus
     }
 }
+
+export const _deleteStudent = async(student) => {
+    return {
+        type: 'DELETE_STUDENT',
+        student
+    }
+}

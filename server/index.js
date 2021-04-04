@@ -84,6 +84,17 @@ app.delete('/api/campuses/:id', async(req, res, next) => {
     }
 })
 
+app.delete('/api/students/:id', async(req, res, next) => {
+    try {
+        const id = req.params.id
+        const toBeDestroyed = await Student.findByPk(id)
+        await toBeDestroyed.destroy()
+        res.send(toBeDestroyed)
+    } catch (error) {
+        console.log('DELETE HANDLER ERROR:', error)
+    }
+})
+
 
 const init = async() => {
     try {

@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { HashRouter as Router, Link } from 'react-router-dom'
 
-import { _loadStudents } from '../store/actions'
+import { _deleteStudent, _loadStudents } from '../store/actions'
 import AddStudent from './AddStudent';
 
 class StudentList extends React.Component {
@@ -32,10 +32,11 @@ class StudentList extends React.Component {
                             <ul>
                                 <Link to={studentUrl}><li>{student.firstName} {student.lastName}</li></Link>
                                 <li>Email: {student.email}</li>
-                                {student.campus !== null
+                                {typeof student.campus === 'string'
                                 ? <li>Campus: {student.campus.name}</li> 
                                 : <h5>This student is not registered to a campus.</h5>}
                             </ul>
+                            <button onClick={() => this.props.deleteStudent(student.id)}>Delete Student</button>
                         </div>)
                     })}
                 </div>
@@ -53,6 +54,10 @@ const mapDispatchToProps = (dispatch) => {
             const students = (await axios.get('/api/students')).data
             dispatch(await _loadStudents(students))
         },
+        deleteStudent: async(id) => {
+            const student = (await axios.delete(`/api/students/${id}`)).data
+            dispatch(await _deleteStudent(student))
+        }
     }
 }
 

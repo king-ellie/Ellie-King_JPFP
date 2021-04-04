@@ -29,7 +29,7 @@ class CampusList extends React.Component {
                                         <li>{campus.name}</li>
                                     </Link>
                                     <li>{campus.address}</li>
-                                    <button onClick={() => this.props.deleteCampus(campus.id)}>X</button>
+                                    <button onClick={() => this.props.deleteCampus(campus.id)}>Delete Campus</button>
                                 </ul>
                             </div>
                         )
