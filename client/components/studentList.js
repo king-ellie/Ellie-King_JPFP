@@ -32,7 +32,7 @@ class StudentList extends React.Component {
                             <ul>
                                 <Link to={studentUrl}><li>{student.firstName} {student.lastName}</li></Link>
                                 <li>Email: {student.email}</li>
-                                {typeof student.campus === 'string'
+                                {student.campusId
                                 ? <li>Campus: {student.campus.name}</li> 
                                 : <h5>This student is not registered to a campus.</h5>}
                             </ul>

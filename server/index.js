@@ -53,9 +53,11 @@ app.get('/api/students/:id', async(req, res, next) => {
 app.post('/api/campuses', async(req, res, next) => {
     const campusName = req.body.campusName
     const address = req.body.address
+    const description = req.body.description
     const newCampus = await Campus.create({
         name: campusName,
-        address: address
+        address: address,
+        description: description
     })
     res.send(newCampus)
 })
@@ -95,6 +97,23 @@ app.delete('/api/students/:id', async(req, res, next) => {
     }
 })
 
+//PUT
+app.put('/api/campuses/:id', async(req, res, next) => {
+    try {
+        const id = req.params.id
+        const { campusName, address, description } = req.body
+        const toBeUpdated = await Campus.findByPk(id)
+
+        toBeUpdated.name = campusName
+        toBeUpdated.address = address
+        toBeUpdated.description = description
+        await toBeUpdated.save()
+
+        res.send(toBeUpdated)
+    } catch (error) {
+        console.log('POST HANDLER ERROR:', error)
+    }
+})
 
 const init = async() => {
     try {

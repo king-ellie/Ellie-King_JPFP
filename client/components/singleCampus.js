@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React from 'react';
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import CampusStudent from './CampusStudent';
+import UpdateCampus from './UpdateCampus';
 
 class SingleCampus extends React.Component {
     constructor(props) {
@@ -23,20 +24,16 @@ class SingleCampus extends React.Component {
                             <div>
                                 <h1>{campus.name}</h1>
                                 <img src={campus.imageUrl}></img>
-                                <p>{campus.description}</p>
+                                {campus.description
+                                    ? <p>{campus.description}</p>
+                                    : <p>This campus does not have a description.</p>
+                                }
                                 <h4>{campus.address}</h4>
                             </div>
+                            <UpdateCampus campus={campus}/>
                             <div id='studentsContainer'>
-                                {campus.students.length 
-                                ? campus.students.map( student => {
-                                    let studentUrl = `/students/${student.id}`
-                                    return (
-                                        <div key={student.id} className='student'>
-                                            <img src={student.imageUrl} ></img>
-                                            <Link to={studentUrl}><h4>{student.firstName} {student.lastName}</h4></Link>
-                                        </div>
-                                    )
-                                }) 
+                                {campus.students
+                                ? campus.students.map( student => <CampusStudent key={student.id} student={student}/>) 
                                 : <h5>This campus does not have any registered students.</h5>}
                             </div>
                         </div>

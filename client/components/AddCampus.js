@@ -19,12 +19,12 @@ class AddCampus extends React.Component {
     async handleSubmit(event) {
         event.preventDefault()
         try{
-            const { campusName, address } = this.state
+            const { campusName, address, description } = this.state
             const newCampus = (await axios.post('/api/campuses', {
                 campusName,
-                address
+                address,
+                description
             })).data
-
             await this.props.addCampus(newCampus)
 
             this.setState( {
@@ -61,6 +61,14 @@ class AddCampus extends React.Component {
                     <input required
                         name='address' 
                         value={this.state.address} 
+                        onChange={this.handleInputChange} 
+                        type='text' 
+                    />
+
+                    <label htmlFor='description'>Campus Description: </label>
+                    <input
+                        name='description' 
+                        value={this.state.description} 
                         onChange={this.handleInputChange} 
                         type='text' 
                     />

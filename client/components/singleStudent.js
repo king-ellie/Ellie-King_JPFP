@@ -24,7 +24,7 @@ class SingleStudent extends React.Component {
                                 <li>GPA: {student.gpa}</li>
                                 <li>Email: {student.email}</li>
                             </ul>
-                            {student.campus !== null 
+                            {student.campus 
                             ? <p>{student.firstName} is registered to a campus: <Link to={`/campuses/${student.campus.id}`}>{student.campus.name}</Link></p>
                             : <h5>This student is not registered to a campus.</h5>}
                         </div>
