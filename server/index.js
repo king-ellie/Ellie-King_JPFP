@@ -115,6 +115,27 @@ app.put('/api/campuses/:id', async(req, res, next) => {
     }
 })
 
+app.put('/api/students/:id', async(req, res, next) => {
+    const id = req.params.id
+    const student = await Student.findByPk(id)
+
+    if (req.body.chosenCampus){ 
+        const chosenCampus = req.body.chosenCampus
+        student.campusId = chosenCampus
+    }
+    if (req.body.unregister){
+        student.campusId = null
+    }
+    if (req.body.firstName){
+        const {firstName, lastName, email } = req.body
+        student.firstName = firstName
+        student.lastName = lastName
+        student.email = email
+    }
+    await student.save()
+    res.send(student)
+})
+
 const init = async() => {
     try {
         await db.sync()

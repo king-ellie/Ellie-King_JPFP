@@ -2,7 +2,6 @@ import axios from 'axios'
 import React from 'react';
 import { connect } from 'react-redux'
 import { HashRouter as Router, Link } from 'react-router-dom'
-
 import { _deleteStudent, _loadStudents } from '../store/actions'
 import AddStudent from './AddStudent';
 

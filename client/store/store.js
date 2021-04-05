@@ -1,11 +1,5 @@
 import { createStore, combineReducers } from 'redux'
-
-const LOAD_CAMPUSES = 'LOAD_CAMPUSES'
-const LOAD_STUDENTS = 'LOAD_STUDENTS'
-const ADD_CAMPUS = 'ADD_CAMPUS'
-const ADD_STUDENT = 'ADD_STUDENT'
-const DELETE_CAMPUS = 'DELETE_CAMPUS'
-const DELETE_STUDENT = 'DELETE_STUDENT'
+import { LOAD_CAMPUSES, LOAD_STUDENTS, ADD_STUDENT, ADD_CAMPUS, DELETE_STUDENT, DELETE_CAMPUS } from './actionTypes'
 
 const campusesReducer = (state = [], action) => {
     if (action.type === LOAD_CAMPUSES){

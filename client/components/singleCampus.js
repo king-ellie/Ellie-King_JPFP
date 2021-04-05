@@ -9,13 +9,12 @@ class SingleCampus extends React.Component {
         super(props)
         this.campusId = this.props.match.params.id
     }
+
     async componentDidMount() {
         await this.props.loadCampus(this.campusId)
     }
+
     render() {
-        if (!this.props.campuses){
-            return <h1>...Loading</h1>
-        }
         return (
             <div>
                 {this.props.campuses.map( campus => {
@@ -33,7 +32,7 @@ class SingleCampus extends React.Component {
                             <UpdateCampus campus={campus}/>
                             <div id='studentsContainer'>
                                 {campus.students
-                                ? campus.students.map( student => <CampusStudent key={student.id} student={student}/>) 
+                                ? campus.students.map( student => <CampusStudent key={student.id} student={student} loadCampus={this.props.loadCampus}/>) 
                                 : <h5>This campus does not have any registered students.</h5>}
                             </div>
                         </div>

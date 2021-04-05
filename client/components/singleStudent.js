@@ -2,16 +2,43 @@ import axios from 'axios'
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { _loadStudents } from '../store/actions'
+import { _loadStudents, _loadCampuses } from '../store/actions'
+import UpdateStudent from './UpdateStudent';
 
 class SingleStudent extends React.Component {
     constructor(props) {
         super(props)
         this.studentId = this.props.match.params.id
+        this.state = {}
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
+
     async componentDidMount() {
         await this.props.loadStudents(this.studentId)
+        await this.props.loadCampuses()
     }
+
+    async handleSubmit(event) {
+        event.preventDefault()
+        const { chosenCampus } = this.state
+        try{
+            if (chosenCampus !== '0'){
+                const newStudent = (await axios.put(`/api/students/${this.studentId}`, {
+                    chosenCampus
+                })).data
+                await this.props.loadStudents(newStudent.id)
+            }
+        }
+        catch(error){
+            console.log('HANDLE SUBMIT ERROR: ', error)
+        }
+    }
+
+    handleChange(event){
+        this.state.chosenCampus = event.target.value
+    }
+
     render() {
         return (
             <div>
@@ -24,9 +51,25 @@ class SingleStudent extends React.Component {
                                 <li>GPA: {student.gpa}</li>
                                 <li>Email: {student.email}</li>
                             </ul>
-                            {student.campus 
-                            ? <p>{student.firstName} is registered to a campus: <Link to={`/campuses/${student.campus.id}`}>{student.campus.name}</Link></p>
-                            : <h5>This student is not registered to a campus.</h5>}
+                            <UpdateStudent student={student}/>
+                            {student.campus === null
+                            ? <div>
+                                <h5>This student is not registered to a campus.</h5>
+                                <form onSubmit={this.handleSubmit}>
+                                    <label htmlFor='register'>Register this student: </label>
+                                    <select name='register' onChange={this.handleChange}>
+                                        <option value='0' >--select a campus--</option>
+                                        {this.props.campuses.map( campus => {
+                                            return (
+                                                <option key={campus.id} value={campus.id}>{campus.name}</option>
+                                            )
+                                        })}
+                                    </select>
+                                    <button>Register</button>
+                                </form>
+                            </div>
+                            : <p>{student.firstName} is registered to a campus: <Link to={`/campuses/${student.campus.id}`}>{student.campus.name}</Link></p>
+                            }
                         </div>
                     )
                 })}
@@ -43,7 +86,11 @@ const mapDispatchToProps = (dispatch) => {
         loadStudents: async(id) => {
             const students = (await axios.get(`/api/students/${id}`)).data
             dispatch(await _loadStudents(students))
-        }
+        },
+        loadCampuses: async() => {
+            const campuses = (await axios.get('/api/campuses')).data
+            dispatch(await _loadCampuses(campuses))
+        },
     }
 }
 

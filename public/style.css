@@ -27,6 +27,7 @@ ul {
 
 #studentsContainer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center
 }
 .student {

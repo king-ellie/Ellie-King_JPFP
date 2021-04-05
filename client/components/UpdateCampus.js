@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react';
 import { connect } from 'react-redux'
-import { _updateCampus } from '../store/actions';
+import { _loadCampuses } from '../store/actions';
 
 class UpdateCampus extends React.Component {
     constructor(props) {
@@ -76,10 +76,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         loadCampus: async(id) => {
             const campuses = (await axios.get(`/api/campuses/${id}`)).data
-            dispatch({
-                type: 'LOAD_CAMPUSES',
-                campuses
-            })
+            dispatch(await _loadCampuses(campuses))
         }
     }
 }

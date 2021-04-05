@@ -12,8 +12,7 @@ class App extends React.Component {
     super(props)
   }
 
-  render () {
-    
+  render () {   
     return (
       <Router>
         <div id='app'>

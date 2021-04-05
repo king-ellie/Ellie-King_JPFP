@@ -16,25 +16,23 @@ class CampusList extends React.Component {
     render() {
         return (
             <Router>
-                <div>
-                    <h1>All Campuses</h1>
-                    <AddCampus />
-                    {this.props.campuses.map( campus => {
-                        const campusUrl = `/campuses/${campus.id}`
-                        return (
-                            <div key={campus.id} className='listed-campus'>
-                                <img src={campus.imageUrl}></img>
-                                <ul>
-                                    <Link to={campusUrl}>
-                                        <li>{campus.name}</li>
-                                    </Link>
-                                    <li>{campus.address}</li>
-                                    <button onClick={() => this.props.deleteCampus(campus.id)}>Delete Campus</button>
-                                </ul>
-                            </div>
-                        )
-                    })}
-                </div>
+                <h1>All Campuses</h1>
+                <AddCampus />
+                {this.props.campuses.map( campus => {
+                    const campusUrl = `/campuses/${campus.id}`
+                    return (
+                        <div key={campus.id} className='listed-campus'>
+                            <img src={campus.imageUrl}></img>
+                            <ul>
+                                <Link to={campusUrl}>
+                                    <li>{campus.name}</li>
+                                </Link>
+                                <li>{campus.address}</li>
+                                <button onClick={() => this.props.deleteCampus(campus.id)}>Delete Campus</button>
+                            </ul>
+                        </div>
+                    )
+                })}
             </Router>
         )
     }
