@@ -15,7 +15,9 @@ app.get('/', (req, res, next) => {
 
 // API ROUTES
 //GET
-app.get('/api/campuses', async(req, res, next) => {
+app.get('/api/campuses', async (req, res, next) => {
+    /*you should always wrap any async functions in a try catch
+    and call next() on your errors to move them along to your error handlers */
     const campuses = await Campus.findAll({
         include: Student
     })
@@ -80,6 +82,8 @@ app.delete('/api/campuses/:id', async(req, res, next) => {
         const id = req.params.id
         const toBeDestroyed = await Campus.findByPk(id)
         await toBeDestroyed.destroy()
+        /*since you're deleting the campus, there isn't anything to send back
+        you could use res.sendStatus() to send back just a 204 http status code instead, which is the convention for when you delete things. */
         res.send(toBeDestroyed)
     } catch (error) {
         console.log('DELETE HANDLER ERROR:', error)
@@ -119,7 +123,7 @@ app.put('/api/students/:id', async(req, res, next) => {
     const id = req.params.id
     const student = await Student.findByPk(id)
 
-    if (req.body.chosenCampus){ 
+    if (req.body.chosenCampus){
         const chosenCampus = req.body.chosenCampus
         student.campusId = chosenCampus
     }
@@ -135,6 +139,8 @@ app.put('/api/students/:id', async(req, res, next) => {
     await student.save()
     res.send(student)
 })
+
+/* you should have some kind of error handling route here */
 
 const init = async() => {
     try {

@@ -12,7 +12,7 @@ class App extends React.Component {
     super(props)
   }
 
-  render () {   
+  render () {
     return (
       <Router>
         <div id='app'>
@@ -32,6 +32,9 @@ class App extends React.Component {
   }
 };
 
+/*you don't use state in this component, so it doesnt need access
+to the state from mapStateToProps
+*/
 const mapStateToProps = (state) => state
 
 export default connect(mapStateToProps)(App);

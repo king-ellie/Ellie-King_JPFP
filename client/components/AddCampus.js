@@ -51,26 +51,26 @@ class AddCampus extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor='campusName'>Campus Name: </label>
                     <input required
-                        name='campusName' 
-                        value={this.state.campusName} 
-                        onChange={this.handleInputChange} 
-                        type='text' 
+                        name='campusName'
+                        value={this.state.campusName}
+                        onChange={this.handleInputChange}
+                        type='text'
                      />
-                    
+
                     <label htmlFor='address'>Campus Address: </label>
                     <input required
-                        name='address' 
-                        value={this.state.address} 
-                        onChange={this.handleInputChange} 
-                        type='text' 
+                        name='address'
+                        value={this.state.address}
+                        onChange={this.handleInputChange}
+                        type='text'
                     />
 
                     <label htmlFor='description'>Campus Description: </label>
                     <input
-                        name='description' 
-                        value={this.state.description} 
-                        onChange={this.handleInputChange} 
-                        type='text' 
+                        name='description'
+                        value={this.state.description}
+                        onChange={this.handleInputChange}
+                        type='text'
                     />
 
                     <button>Add Campus</button>
@@ -83,7 +83,8 @@ class AddCampus extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addCampus: async(newCampus) => {
+        addCampus: async (newCampus) => {
+            //addCampus isn't an async function so you don't need await here
             dispatch(await _addCampus(newCampus))
         }
     }

@@ -7,6 +7,7 @@ import UpdateCampus from './UpdateCampus';
 class SingleCampus extends React.Component {
     constructor(props) {
         super(props)
+        /*should be in this.state */
         this.campusId = this.props.match.params.id
     }
 
@@ -32,7 +33,7 @@ class SingleCampus extends React.Component {
                             <UpdateCampus campus={campus}/>
                             <div id='studentsContainer'>
                                 {campus.students
-                                ? campus.students.map( student => <CampusStudent key={student.id} student={student} loadCampus={this.props.loadCampus}/>) 
+                                ? campus.students.map( student => <CampusStudent key={student.id} student={student} loadCampus={this.props.loadCampus}/>)
                                 : <h5>This campus does not have any registered students.</h5>}
                             </div>
                         </div>

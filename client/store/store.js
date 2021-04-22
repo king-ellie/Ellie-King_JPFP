@@ -10,6 +10,7 @@ const campusesReducer = (state = [], action) => {
     }
     if (action.type === DELETE_CAMPUS){
         const newState = [...state]
+        //could also use filter here...
         for (let i = 0; i < state.length; i++){
             const currCampus = state[i]
             if (currCampus.id === action.campus.id){

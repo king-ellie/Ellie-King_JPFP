@@ -16,6 +16,8 @@ class CampusList extends React.Component {
     render() {
         return (
             <Router>
+                {/*you don't need to wrap this component in a Router
+                component, since you've already wrapped the top level of you application, (in the app.js file) in a router.*/}
                 <h1>All Campuses</h1>
                 <AddCampus />
                 {this.props.campuses.map( campus => {
@@ -39,6 +41,9 @@ class CampusList extends React.Component {
 }
 
 
+/*you should only get the parts of your state that you need in the component
+in your mapStateToProps. you only use campuses in this component so you should specifically
+get the campuses from the state. */
 const mapStateToProps = (state) => state
 
 const mapDispatchToProps = (dispatch) => {

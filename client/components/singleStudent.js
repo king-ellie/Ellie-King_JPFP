@@ -8,6 +8,7 @@ import UpdateStudent from './UpdateStudent';
 class SingleStudent extends React.Component {
     constructor(props) {
         super(props)
+        //studentId should be inside of state
         this.studentId = this.props.match.params.id
         this.state = {}
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -35,7 +36,19 @@ class SingleStudent extends React.Component {
         }
     }
 
-    handleChange(event){
+    handleChange(event) {
+        /*it's bad practice to directly modify the state like this.
+        if you want something to be apart of the state, you should initialize it first within the constructor.
+
+        which would look like this:
+            this.state = {
+                chosenCampus = ''
+            }
+
+        then, you should only modify it using this.setState()...
+        so this should be:
+        this.setState({chosenCampus: event.target.value})
+        */
         this.state.chosenCampus = event.target.value
     }
 
@@ -44,7 +57,7 @@ class SingleStudent extends React.Component {
             <div>
                 {this.props.students.map( student => {
                     return (
-                        <div key={student.id}>    
+                        <div key={student.id}>
                             <img src={student.imageUrl}></img>
                             <h2>{student.firstName} {student.lastName}</h2>
                             <ul>
